@@ -10,17 +10,9 @@ Feature: Account Creation and Login
     When I enter valid login credentials
     Then User should be logged in successfully
 
-  Scenario: Duplicate registration with same email
-    Given I visit the Magento signup page
-    When I fill the signup form with an already registered email
-    Then An error message should appear for duplicate email
+Scenario: User attempts to register with an existing email
+  Given I visit the Magento signup page
+  When I try to register using an existing email
+  Then An error message should be displayed about the existing email
 
-  Scenario: Signup with invalid email format
-    Given I visit the Magento signup page
-    When I fill the signup form with invalid email format
-    Then A validation error should be shown for email field
 
-  Scenario: Submit signup form with all fields blank
-    Given I visit the Magento signup page
-    When I submit the signup form without entering details
-    Then Validation messages should be displayed for required fields

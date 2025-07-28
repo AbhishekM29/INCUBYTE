@@ -1,62 +1,31 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+class SignupPage {
+  fillFirstName(firstName) {
+    cy.get("#firstname").clear().type(firstName);
+  }
 
-Given("I visit the Magento signup page", () => {
-  cy.visit("/customer/account/create/");
-});
+  fillLastName(lastName) {
+    cy.get("#lastname").clear().type(lastName);
+  }
 
-When("I enter valid registration details", function () {
-  const email = `user_${Date.now()}@mailinator.com`;
-  cy.wrap(email).as("generatedEmail");
+  fillEmail(email) {
+    cy.get("#email_address").clear().type(email);
+  }
 
-  cy.get("#firstname").type("Abhi");
-  cy.get("#lastname").type("Tester");
-  cy.get("#email_address").type(email);
-  cy.get("#password").type("Test@1234");
-  cy.get("#password-confirmation").type("Test@1234");
-});
+  fillPassword(password) {
+    cy.get("#password").clear().type(password);
+  }
 
-When("I click on the Create Account button", () => {
-  cy.get('button[title="Create an Account"]').click();
-});
+  fillConfirmPassword(password) {
+    cy.get("#password-confirmation").clear().type(password);
+  }
 
-Then("I should see the account dashboard", () => {
-  cy.contains("My Account").should("exist");
-});
+  submitForm() {
+    cy.get("button[title='Create an Account']").click();
+  }
 
-Given("I visit the Magento login page", () => {
-  cy.visit("/customer/account/login/");
-});
+  getErrorAlert() {
+    return cy.get(".message-error div");
+  }
+}
 
-When("I enter valid login credentials", function () {
-  cy.get("@generatedEmail").then((email) => {
-    cy.get("#email").type(email);
-    cy.get("#pass").type("Test@1234");
-  });
-});
-
-When("I click on the Login button", () => {
-  cy.get("#send2").click();
-});
-
-Then("I should see the account dashboard", () => {
-  cy.contains("My Account").should("exist");
-});
-Given("I visit the Magento signup page", () => {
-  cy.visit("/customer/account/create/");
-});
-
-Given("I visit the Magento login page", () => {
-  cy.visit("/customer/account/login/");
-});
-
-When("I click on the Create Account button", () => {
-  cy.get('button[title="Create an Account"]').click();
-});
-
-When("I click on the Login button", () => {
-  cy.get("#send2").click();
-});
-
-Then("I should see the account dashboard", () => {
-  cy.contains("My Account").should("exist");
-});
+export default SignupPage;
