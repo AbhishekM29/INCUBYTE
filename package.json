@@ -1,0 +1,17 @@
+{
+  "name": "magento-signup-automation",
+  "version": "1.0.0",
+  "description": "Cypress automation using BDD and POM for Magento sign-up flow",
+  "scripts": {
+    "test": "cypress open"
+  },
+"devDependencies": {
+  "cypress": "^13.0.0",
+  "@badeball/cypress-cucumber-preprocessor": "^15.0.0",
+  "@cypress/webpack-preprocessor": "^5.17.0",
+  "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5"
+
+
+
+  }
+}
