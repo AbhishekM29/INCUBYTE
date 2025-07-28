@@ -47,3 +47,22 @@ Then("An error message should be displayed about the existing email", () => {
     "There is already an account with this email address"
   );
 });
+// -------- TC04: Invalid Email Format --------
+//
+When('I fill out the signup form with an invalid email and submit', () => {
+  const invalidEmail = 'invalidemail@';
+  const password = 'Test@1234';
+
+  cy.get('#firstname').type('Invalid');
+  cy.get('#lastname').type('Email');
+  cy.get('#email_address').type(invalidEmail);
+  cy.get('#password').type(password);
+  cy.get('#password-confirmation').type(password);
+  cy.get('button[title="Create an Account"]').click();
+});
+
+Then('An email format validation error should be displayed', () => {
+  cy.get('#email_address-error')
+    .should('be.visible')
+    .and('contain', 'Please enter a valid email address (Ex: johndoe@domain.com).');
+});
